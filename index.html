@@ -4,19 +4,27 @@
         <meta charset="UTF-8">
         <title>Fetcher</title>
         <link rel="stylesheet" href="css/style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        
-        <h1>Exchanges</h1>
+        <div class="headerBox">
+            <h1>Exchanges Fetcher</h1>
+        </div>
 
-        <input id="countryValue" type="text" placeholder="text"></input>
-        <button id="submitCountry" type="submit">Submit</button>
+        <div class="searcherBox">
+            <input id="countryValue" type="text" placeholder="Country"></input>
+            <button id="submitCountry" type="submit">Submit</button>
+        </div>
 
         <br/>
 
-        <ul id="listShown">
-        </ul>
+        <div class="resultsBox">
+            <div id="listShown" class="results_container"></div>
+        </div>
 
     </body>
 
