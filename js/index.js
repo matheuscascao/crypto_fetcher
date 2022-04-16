@@ -1,22 +1,44 @@
 const data_country = document.querySelector("#countryValue");
 const listShown = window.document.querySelector("#listShown");
+const APIurl = "https://api.coingecko.com/api/v3/exchanges";
+const list = document.querySelector("#countriesList");
 
-async function getList(){
-  // gets the dada from the API
-  let dataList = "";
-  dataList = await axios.get('https://api.coingecko.com/api/v3/exchanges');
+async function getList(url){
+  // gets data from the Coingecko API
+  let response = await fetch(url);
+  let dataList = response.json();
 
-  return dataList;
+  return await dataList;
 }
+
+async function datalistFill(){
+  let exchangesList = await getList(APIurl);
+  let countriesList = [];
+  
+  exchangesList.forEach((item) => {
+    if(!countriesList.includes(item.country)){
+      countriesList.push(item.country)
+    };
+  });
+
+  for(q in countriesList){
+    let item = document.createElement("option");
+    item.value = countriesList[q];
+    list.appendChild(item);
+  };
+
+};
+
+datalistFill();
 
 async function filterData(selectedData){
   // filters the data and returns the entire object
-  let allData = await getList();
+  let allData = await getList(APIurl);
   let filteredObjects = [];
 
-  for(let q = 0; q < allData.data.length; q++){
-    if(allData.data[q].country == selectedData){
-      filteredObjects.push(allData.data[q]);
+  for(q in allData){
+    if(allData[q].country == selectedData){
+      filteredObjects.push(allData[q]);
     };
   };
 
@@ -41,8 +63,6 @@ function appendElement(exchange){
   } else if(exchange == false){
     liCreate.innerHTML = `<p>${data_country.value} doesn't have any exchanges</p>`;
   };
-
-  // liCreate.setAttribute('id', 'exchange_item_container');
   liCreate.href = exchange.url;
   liCreate.target = "_blank";
 
@@ -63,8 +83,7 @@ async function mainShow(){
     };
   } else{
     appendElement(false);
-  }
-
+  };
 };
 
 document.querySelector("#submitCountry").addEventListener("click", mainShow);

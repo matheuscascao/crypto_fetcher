@@ -16,8 +16,11 @@
         </div>
 
         <div class="searcherBox">
-            <input id="countryValue" type="text" placeholder="Country"></input>
+            <input id="countryValue" type="text" autocomplete="off" placeholder="Country" list="countriesList"></input>
             <button id="submitCountry" type="submit">Submit</button>
+
+            <datalist id="countriesList">
+            </datalist>
         </div>
 
         <br/>
@@ -28,7 +31,6 @@
 
     </body>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js" type="text/javascript"></script>
     
 </html>
